@@ -15,7 +15,9 @@ Page({
     sliderLeft: 0,
     jokeList:[],
     page:1,
-    imgList:[]
+    imgList:[],
+    hasUser:false,
+    userInfo:null
   },
   onLoad: function () {
     var that = this;
@@ -58,9 +60,30 @@ Page({
                 imgList: res
             })
         })
+    }else if(this.data.activeIndex==2){
+       console.log(app.globalData.userInfo)
+       if(app.globalData.userInfo!=null){
+           this.setData({
+                hasUser:true,
+                userInfo:app.globalData.userInfo
+           })
+       }else{
+            this.setData({
+                hasUser:false
+            })
+       }
     }
   },
+  getUserInfo(info) {
+    const userInfo = info.detail.userInfo
+    this.setData({
+      userInfo,
+      hasUser: true
+    })
+  },
   getJoke: function() {
+    this.showLoad()
+    var that = this
     return new Promise((resolve, reject)=>{
         wx.request({
             url: 'https://api.apiopen.top/getJoke',
@@ -77,6 +100,7 @@ Page({
             success: function(res){
                 console.log(res.data.result)
                 resolve(res.data.result)
+                that.hideLoad()
                 // that.setData({
                 //     jokeList: res.data.result,
                 // })
@@ -85,6 +109,8 @@ Page({
     })
   },
   getImage:function(){
+    this.showLoad()
+    var that = this
     return new Promise((resolve, reject)=>{
         wx.request({
             url: 'https://api.apiopen.top/getImages',
@@ -101,6 +127,7 @@ Page({
             success: function(res){
                 console.log(res.data.result)
                 resolve(res.data.result)
+                that.hideLoad()
             },
         })
     })
@@ -136,6 +163,15 @@ Page({
     wx.pageScrollTo({
         scrollTop: 0
     })
+  },
+  showLoad(){
+    wx.showLoading({
+        title: '玩命加载中',
+    })
+  },
+  hideLoad(){
+    wx.hideLoading();
   }
+
   
 })
