@@ -1,0 +1,95 @@
+page,
+.page,
+.page__bd{
+    /* height: 100%; */
+}
+.page__bd{
+    padding-bottom: 0;
+}
+.weui-tab__content{
+    padding-top:5px;
+    text-align:center;
+    overflow:scroll;
+    background:#eeeeee;    
+}
+
+.joke{
+    background:white;
+    padding:10px 15px;
+    margin-bottom:5px;
+}
+.joke .joke-head image{
+    height:40px;
+    width:40px;
+    border-radius:50%;
+    display:inline-block;
+    float:left;
+}
+.joke .joke-head div{
+    display:inline-block
+}
+.joke .joke-head div{
+    display:inline-block;
+    width:80%;
+    text-align:left;
+}
+.joke .joke-head .joke-head-time{
+    color:#999;
+    font-size:14px;
+
+}
+
+.joke .joke-content .joke-content-name{
+    text-align:left;
+    padding:10px 0;
+}
+.joke .joke-content video{
+    width: 100%;
+}
+.joke .joke-comment{
+    background:whitesmoke;
+    padding:10px;
+    border-radius:5px;
+}
+.joke{
+    /* height: 100%; */
+}
+
+
+.joke .joke-comment .joke-comment-head image{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    float:left;
+}
+.joke .joke-comment .joke-comment-head .joke-comment-name{
+    display:inline-block;
+    text-align:left;
+    width:85%;
+    height:30px;
+    line-height:30px;    
+}
+.joke .joke-comment .joke-comment-content{
+    text-align:left;
+    padding-left:40px;
+}
+.joke .joke-bottom{
+    width:100%;
+    margin-top:5px;
+}
+.joke .joke-bottom div{
+    width:25%;
+    display:inline-block;
+}
+.joke .joke-bottom div i{
+    font-size:18px;
+    margin-right:3px;
+}
+
+
+
+.clearfix{
+    display: block;
+    content:'';
+    clear: both;
+}

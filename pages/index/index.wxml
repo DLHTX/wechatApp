@@ -1,0 +1,69 @@
+<view class="page">
+  <view class="page__bd">
+      <view class="weui-tab">
+          <view class="weui-navbar" style="background-color:rgb(248,248,248);">
+              <block wx:for="{{tabs}}" wx:key="*this">
+                  <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                      <view class="weui-navbar__title">{{item}}</view>
+                  </view>
+              </block>
+              <view class="weui-navbar__slider" style="left: {{sliderLeft}} px; transform:translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+          </view>
+          <view class="weui-tab__panel">
+              <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                <view wx:if='{{page!=1}}' bindtap='scrollToTop' class='iconfont icon-shangla' style="display:inline;position:fixed;font-size:49px;color:#989898;left:79%;top:85%;z-index:999;"></view>
+                  <view class="joke" wx:for="{{jokeList}}">
+                    <view class="joke-head">
+                        <image src="{{item.header}}" alt=""/>
+                        <div class="clearfix">
+                            <view class="joke-head-name">{{item.name}}</view>  
+                            <view class="joke-head-time">{{item.passtime}}</view>  
+                        </div>
+                    </view>  
+                    <view class="joke-content">
+                        <view class="joke-content-name">{{item.text}}</view>  
+                        <video src="{{item.video}}" wx:if='{{item.video!=null}}'></video>
+                    </view>
+                    
+                    <view class="joke-comment" wx:if='{{item.top_comments_content!=null}}'>
+                        <view class="joke-comment-head">
+                            <image src="{{item.top_comments_header}}" alt=""/>
+                            <view class="joke-comment-name">{{item.top_comments_name}}</view>  
+                        </view>
+                        <view class="joke-comment-content">
+                           <span>{{item.top_comments_content}}</span>
+                        </view>
+                    </view>
+
+                    <view class="joke-bottom">
+                        <div>
+                            <i class='iconfont icon-dianzan'></i>
+                            <span>{{item.up}}</span>
+                        </div>
+                        <div>
+                                <i class='iconfont icon-dislike'></i>
+                                <span>{{item.down}}</span>
+                            </div>
+                            <div>
+                                <i class='iconfont icon-pinglun'></i>
+                                <span>{{item.comment}}</span>
+                            </div>
+                            <div>
+                                <button class='iconfont icon-fenxiang' open-type="share" style="display:inline;background-color:transparent;"></button>
+                            </div>
+                    </view>
+
+                  </view>  
+
+              </view>
+              <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    <view wx:if='{{page!=1}}' bindtap='scrollToTop' class='iconfont icon-shangla' style="display:inline;position:fixed;font-size:49px;color:#989898;left:79%;top:85%;z-index:999;"></view>
+                    <view wx:for="{{imgList}}">
+                        <image src="{{item.img}}"  alt="" style="width:100%;" mode="widthFix"/>
+                    </view>
+              </view>
+              <view class="weui-tab__content" hidden="{{activeIndex != 2}}">选项三的内容</view>
+          </view>
+      </view>
+  </view>
+</view>
