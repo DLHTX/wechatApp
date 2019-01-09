@@ -11,7 +11,7 @@
           </view>
           <view class="weui-tab__panel">
               <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                <view wx:if='{{page!=1}}' bindtap='scrollToTop' class='iconfont icon-shangla' style="display:inline;position:fixed;font-size:49px;color:#61616166;left:79%;top:85%;z-index:999;"></view>
+                <image wx:if='{{page!=1}}' src='../../img/toTop.png' bindtap='scrollToTop' style="position:fixed;color:#61616166;left:79%;top:86%;z-index:999;width:50px;height:50px; "/>
                   <view class="joke" wx:for="{{jokeList}}">
                     <view class="joke-head">
                         <image src="{{item.header}}" alt=""/>
@@ -24,7 +24,6 @@
                         <view class="joke-content-name">{{item.text}}</view>  
                         <video src="{{item.video}}" wx:if='{{item.video!=null}}'></video>
                     </view>
-                    
                     <view class="joke-comment" wx:if='{{item.top_comments_content!=null}}'>
                         <view class="joke-comment-head">
                             <image src="{{item.top_comments_header}}" alt=""/>
@@ -34,7 +33,6 @@
                            <span>{{item.top_comments_content}}</span>
                         </view>
                     </view>
-
                     <view class="joke-bottom">
                         <div>
                             <i class='iconfont icon-dianzan'></i>
@@ -52,33 +50,135 @@
                                 <button class='iconfont icon-fenxiang' open-type="share" style="display:inline;background-color:transparent;"></button>
                             </div>
                     </view>
-
                   </view>  
-
               </view>
+
               <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view wx:if='{{page!=1}}' bindtap='scrollToTop' class='iconfont icon-shangla' style="display:inline;position:fixed;font-size:49px;color:#61616166;left:79%;top:85%;z-index:999;"></view>
-                    <view wx:for="{{imgList}}">
-                        <image src="{{item.img}}"  alt="" style="width:100%;" mode="widthFix"/>
-                    </view>
+                <image wx:if='{{page!=1}}' src='../../img/toTop.png' bindtap='scrollToTop' style="position:fixed;color:#61616166;left:79%;top:86%;z-index:999;width:50px;height:50px; "/>
+                    <view class="joke" wx:for="{{jokeImgList}}">
+                        <view class="joke-head">
+                            <image src="{{item.header}}" alt=""/>
+                            <div class="clearfix">
+                                <view class="joke-head-name">{{item.name}}</view>  
+                                <view class="joke-head-time">{{item.passtime}}</view>  
+                            </div>
+                        </view>  
+                        <view class="joke-content">
+                            <view class="joke-content-name">{{item.text}}</view>  
+                            <view class="joke-comment-name"  data-img="{{item.images}}" bindtap='biggerImg' style="background:url({{item.images}});height:215px;background-size:cover;margin-bottom:20px;"></view>  
+                        </view>
+                        <view class="joke-comment" wx:if='{{item.top_comments_content!=null}}'>
+                            <view class="joke-comment-head">
+                                <image src="{{item.top_comments_header}}" alt=""/>
+                                <view class="joke-comment-name">{{item.top_comments_name}}</view>  
+                            </view>
+                            <view class="joke-comment-content">
+                               <span>{{item.top_comments_content}}</span>
+                            </view>
+                        </view>
+                        <view class="joke-bottom">
+                            <div>
+                                <i class='iconfont icon-dianzan'></i>
+                                <span>{{item.up}}</span>
+                            </div>
+                            <div>
+                                    <i class='iconfont icon-dislike'></i>
+                                    <span>{{item.down}}</span>
+                                </div>
+                                <div>
+                                    <i class='iconfont icon-pinglun'></i>
+                                    <span>{{item.comment}}</span>
+                                </div>
+                                <div>
+                                    <button class='iconfont icon-fenxiang' open-type="share" style="display:inline;background-color:transparent;"></button>
+                                </div>
+                        </view>
+                    </view>  
               </view>
+
               <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-
-                <view class="page-body">
-                    <view class="page-section">
-                      <view class="page-body-info">
-                        <block wx:if="{{hasUser === false}}">
-                          <text class="page-body-text">未获取</text>
-                          <button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo" >获取用户信息</button>
-                        </block>
-                        <block wx:if="{{hasUser === true}}">
-                          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
-                          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-                        </block>
-                      </view>
+                <image wx:if='{{page!=1}}' src='../../img/toTop.png' bindtap='scrollToTop' style="position:fixed;color:#61616166;left:79%;top:86%;z-index:999;width:50px;height:50px; "/>
+                <view class="joke" wx:for="{{jokeGifList}}">
+                    <view class="joke-head">
+                        <image src="{{item.header}}" alt=""/>
+                        <div class="clearfix">
+                            <view class="joke-head-name">{{item.name}}</view>  
+                            <view class="joke-head-time">{{item.passtime}}</view>  
+                        </div>
+                    </view>  
+                    <view class="joke-content">
+                        <view class="joke-content-name">{{item.text}}</view>  
+                        <image src="{{item.images}}" alt="" mode='widthFix' />
                     </view>
-                </view>
+                    <view class="joke-comment" wx:if='{{item.top_comments_content!=null}}'>
+                        <view class="joke-comment-head">
+                            <image src="{{item.top_comments_header}}" alt=""/>
+                            <view class="joke-comment-name">{{item.top_comments_name}}</view>  
+                        </view>
+                        <view class="joke-comment-content">
+                           <span>{{item.top_comments_content}}</span>
+                        </view>
+                    </view>
+                    <view class="joke-bottom">
+                        <div>
+                            <i class='iconfont icon-dianzan'></i>
+                            <span>{{item.up}}</span>
+                        </div>
+                        <div>
+                                <i class='iconfont icon-dislike'></i>
+                                <span>{{item.down}}</span>
+                            </div>
+                            <div>
+                                <i class='iconfont icon-pinglun'></i>
+                                <span>{{item.comment}}</span>
+                            </div>
+                            <div>
+                                <button class='iconfont icon-fenxiang' open-type="share" style="display:inline;background-color:transparent;"></button>
+                            </div>
+                    </view>
+                </view> 
+              </view>
 
+              <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
+                <image wx:if='{{page!=1}}' src='../../img/toTop.png' bindtap='scrollToTop' style="position:fixed;color:#61616166;left:79%;top:86%;z-index:999;width:50px;height:50px; "/>
+                <view class="joke" wx:for="{{jokeTextList}}">
+                    <view class="joke-head">
+                        <image src="{{item.header}}" alt=""/>
+                        <div class="clearfix">
+                            <view class="joke-head-name">{{item.name}}</view>  
+                            <view class="joke-head-time">{{item.passtime}}</view>  
+                        </div>
+                    </view>  
+                    <view class="joke-content">
+                        <view class="joke-content-name">{{item.text}}</view>  
+                        <video src="{{item.video}}" wx:if='{{item.video!=null}}'></video>
+                    </view>
+                    <view class="joke-comment" wx:if='{{item.top_comments_content!=null}}'>
+                        <view class="joke-comment-head">
+                            <image src="{{item.top_comments_header}}" alt=""/>
+                        </view>
+                        <view class="joke-comment-content">
+                           <span>{{item.top_comments_content}}</span>
+                        </view>
+                    </view>
+                    <view class="joke-bottom">
+                        <div>
+                            <i class='iconfont icon-dianzan'></i>
+                            <span>{{item.up}}</span>
+                        </div>
+                        <div>
+                                <i class='iconfont icon-dislike'></i>
+                                <span>{{item.down}}</span>
+                            </div>
+                            <div>
+                                <i class='iconfont icon-pinglun'></i>
+                                <span>{{item.comment}}</span>
+                            </div>
+                            <div>
+                                <button class='iconfont icon-fenxiang' open-type="share" style="display:inline;background-color:transparent;"></button>
+                            </div>
+                    </view>
+                </view> 
               </view>
           </view>
       </view>

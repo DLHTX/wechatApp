@@ -1,0 +1,15 @@
+<view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+        <block wx:if="{{hasUser === false}}">
+          <text class="page-body-text">未获取</text>
+          <button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo" >获取用户信息</button>
+        </block>
+        <block wx:if="{{hasUser === true}}">
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" style="margin-top:40px;"></image>
+          <text class="userinfo-nickname" style="display:block;">{{userInfo.nickName}}</text>
+        </block>
+
+      </view>
+    </view>
+</view>

@@ -9,15 +9,16 @@ Page({
     // userInfo: {},
     // hasUserInfo: false,
     // canIUse: wx.canIUse('button.open-type.getUserInfo')
-    tabs: ["段子", "美图", "我的"],
+    tabs: ["视频", "图片", "动图","文字"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    jokeList:[],
     page:1,
-    imgList:[],
-    hasUser:false,
-    userInfo:null
+    jokeList:[],
+    jokeImgList:[],
+    jokeGifList:[],
+    jokeTextList:[]
+  
   },
   onLoad: function () {
     var that = this;
@@ -51,36 +52,35 @@ Page({
             })
         })
     }else if(this.data.activeIndex==1){
-        console.log('1')
         this.setData({
             page:1
         })//初始化页数
-        this.getImage().then(res=>{
+        this.getJokeImg().then(res=>{
             this.setData({
-                imgList: res
+                jokeImgList: res
             })
         })
     }else if(this.data.activeIndex==2){
-       console.log(app.globalData.userInfo)
-       if(app.globalData.userInfo!=null){
-           this.setData({
-                hasUser:true,
-                userInfo:app.globalData.userInfo
-           })
-       }else{
+        this.setData({
+            page:1
+        })//初始化页数
+        this.getJokeGif().then(res=>{
             this.setData({
-                hasUser:false
+                jokeGifList: res
             })
-       }
+        })
+    }else if(this.data.activeIndex==3){
+        this.setData({
+            page:1
+        })//初始化页数
+        this.getJokeText().then(res=>{
+            this.setData({
+                jokeTextList: res
+            })
+        })
     }
   },
-  getUserInfo(info) {
-    const userInfo = info.detail.userInfo
-    this.setData({
-      userInfo,
-      hasUser: true
-    })
-  },
+
   getJoke: function() {
     this.showLoad()
     var that = this
@@ -89,7 +89,8 @@ Page({
             url: 'https://api.apiopen.top/getJoke',
             data: {
                 page:this.data.page,
-                count:10
+                count:5,
+                type:'video'
             },
             method: 'POST',
             header: {
@@ -101,22 +102,20 @@ Page({
                 console.log(res.data.result)
                 resolve(res.data.result)
                 that.hideLoad()
-                // that.setData({
-                //     jokeList: res.data.result,
-                // })
             },
         })
     })
   },
-  getImage:function(){
+  getJokeImg:function(){
     this.showLoad()
     var that = this
     return new Promise((resolve, reject)=>{
         wx.request({
-            url: 'https://api.apiopen.top/getImages',
+            url: 'https://api.apiopen.top/getJoke',
             data: {
                 page:this.data.page,
-                count:10
+                count:5,
+                type:'image'
             },
             method: 'POST',
             header: {
@@ -125,11 +124,66 @@ Page({
                 'Accept': 'application/json'
               },
             success: function(res){
-                console.log(res.data.result)
                 resolve(res.data.result)
                 that.hideLoad()
             },
         })
+    })
+  },
+  getJokeGif:function(){
+    this.showLoad()
+    var that = this
+    return new Promise((resolve, reject)=>{
+        wx.request({
+            url: 'https://api.apiopen.top/getJoke',
+            data: {
+                page:this.data.page,
+                count:5,
+                type:'gif'
+            },
+            method: 'POST',
+            header: {
+                //设置参数内容类型为x-www-form-urlencoded
+                'content-type':'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+              },
+            success: function(res){
+                resolve(res.data.result)
+                that.hideLoad()
+            },
+        })
+    })
+  },
+  getJokeText:function(){
+    this.showLoad()
+    var that = this
+    return new Promise((resolve, reject)=>{
+        wx.request({
+            url: 'https://api.apiopen.top/getJoke',
+            data: {
+                page:this.data.page,
+                count:5,
+                type:'text'
+            },
+            method: 'POST',
+            header: {
+                //设置参数内容类型为x-www-form-urlencoded
+                'content-type':'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+              },
+            success: function(res){
+                resolve(res.data.result)
+                that.hideLoad()
+            },
+        })
+    })
+  },
+
+  biggerImg(e){
+    let img = e.target.dataset.img
+    wx.previewImage({
+        current:img, // 当前显示图片的链接，不填则默认为 urls 的第一张
+        urls: [img],
     })
   },
   onReachBottom: function () {
@@ -150,9 +204,23 @@ Page({
             wx.hideLoading();
         })
     }else if(this.data.activeIndex==1){
-        this.getImage().then(img=>{
+        this.getJokeImg().then(img=>{
             this.setData({
-                imgList: this.data.imgList.concat(img)
+                jokeImgList: this.data.jokeImgList.concat(img)
+            })
+            wx.hideLoading();
+        })
+    }else if(this.data.activeIndex==2){
+        this.getJokeGif().then(img=>{
+            this.setData({
+                jokeGifList: this.data.jokeGifList.concat(img)
+            })
+            wx.hideLoading();
+        })
+    }else if(this.data.activeIndex==3){
+        this.getJokeText().then(img=>{
+            this.setData({
+                jokeTextList: this.data.jokeTextList.concat(img)
             })
             wx.hideLoading();
         })
@@ -171,7 +239,8 @@ Page({
   },
   hideLoad(){
     wx.hideLoading();
-  }
+  },
+
 
   
 })

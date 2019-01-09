@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/joke/joke"
+    "pages/music/music",
+    "pages/my/my"
   ],
   "window":{
     "navigationBarTextStyle": "black",
@@ -10,5 +11,27 @@
     "navigationBarBackgroundColor": "#f8f8f8",
     "backgroundColor": "#f8f8f8",
     "backgroundTextStyle":"dark"
-  }
+  },
+  "tabBar": {  
+     "color": "#a9b7b7",  
+     "selectedColor": "#11cd6e",  
+     "borderStyle": "white" ,
+     "list": [{  
+       "selectedIconPath": "img/tv-s.png",  
+       "iconPath": "img/tv.png",  
+       "pagePath": "pages/index/index",  
+       "text": "段子"  
+     }, {  
+       "selectedIconPath": "img/music-s.png",  
+       "iconPath": "img/music.png",  
+       "pagePath": "pages/music/music",  
+       "text": "音乐"  
+     },{  
+       "selectedIconPath": "img/my-s.png",  
+       "iconPath": "img/my.png",  
+       "pagePath": "pages/my/my",  
+       "text": "我的"  
+     }
+    ]  
+   } 
 }
