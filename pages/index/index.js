@@ -5,10 +5,6 @@ const app = getApp()
 
 Page({
   data: {
-    // motto: '进入小程序',
-    // userInfo: {},
-    // hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo')
     tabs: ["视频", "图片", "动图","文字"],
     activeIndex: 0,
     sliderOffset: 0,
@@ -30,11 +26,11 @@ Page({
             });
         }
     });
-    this.getJoke().then(res=>{
-        this.setData({
-            jokeList: res
-        })
-    })
+    // this.getJoke().then(res=>{
+    //     this.setData({
+    //         jokeList: res
+    //     })
+    // })
 
   },
   tabClick: function (e) {

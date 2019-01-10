@@ -1,0 +1,21 @@
+<view class='cm-detail'>
+    <view class='cm-detail-nav'>
+        <image src='{{playList.songListPic}}'/>
+        <view class='cm-detail-title'>
+            <view>{{playList.songListName}}</view>
+            <view style="margin-top:35px;font-size:13px;">{{playList.songListPlayCount}}人听过</view>
+        </view>
+    </view>
+
+    <view class='cm-detail-content'>
+        <view class='song-box' wx:for="{{playList.songs}}" wx:key='index'>
+            <span style="color:#999;padding:0 14px;">{{index + 1}}</span>
+            <view style="width:90%;border-bottom:1px solid #eee;padding:5px 0;">
+                <view >{{item.name}}</view>
+                <view style="color:#999;font-size:13px;">{{item.singer}}-{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+
+    <image src='../../img/musicIcon.png' style="position:fixed;top:84%;width:65px;height:65px;left:77%;"></image>
+</view>

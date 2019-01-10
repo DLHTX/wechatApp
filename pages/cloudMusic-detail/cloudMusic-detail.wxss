@@ -1,0 +1,29 @@
+.cm-detail{
+    height: 100%;
+    background:#e64b3a;
+}
+.cm-detail-nav{
+    background-color:#e64b3a;
+    color:white;
+    padding:20px 20px;    
+}
+.cm-detail-nav image{
+    height:150px;
+    width:150px;
+}
+.cm-detail-nav .cm-detail-title{
+    width:165px;
+    float:right;
+}
+.cm-detail-content{
+    height: 100%;
+    border-radius:8px;
+    background-color:white;
+    padding:10px;
+}
+.song-box{
+    height:45px;
+    display:flex;
+    align-items:center;
+    margin-top:10px;
+}

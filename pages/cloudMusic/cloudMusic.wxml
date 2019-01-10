@@ -1,0 +1,21 @@
+<view>
+    <view class='music-bar'>
+        <view wx:for='{{musicBar}}' class='music-bar-item {{index==typeIndex?"music-bar-active":""}}' wx:key="index"  wx:for-index="index" data-index='{{index}}' bindtap='changeType'>{{item}}</view>
+    </view>
+
+    <view class='music-container' wx:if='{{typeIndex==0}}'>
+        <view class='music-box' wx:for='{{HQsongList}}' wx:key="index" data-playid="{{item.id}}" bindtap="goDetail" >
+            <view class='music-imageBox'>
+                <image src="{{item.coverImgUrl}}"/>
+                <view class='music-num'>
+                    <i></i>
+                    <span>{{item.songNum}}首</span>
+                </view>
+            </view>
+            <view class='music-title'>
+               {{item.title}}
+            </view>
+        </view>
+    </view>
+
+</view>

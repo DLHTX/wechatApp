@@ -1,8 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/music/music",
+    "pages/cloudMusic/cloudMusic",
+    "pages/cloudMusic-detail/cloudMusic-detail",
     "pages/my/my"
   ],
   "window":{
@@ -17,19 +17,19 @@
      "selectedColor": "#11cd6e",  
      "borderStyle": "white" ,
      "list": [{  
+       "pagePath": "pages/index/index",  
        "selectedIconPath": "img/tv-s.png",  
        "iconPath": "img/tv.png",  
-       "pagePath": "pages/index/index",  
        "text": "段子"  
      }, {  
+       "pagePath": "pages/cloudMusic/cloudMusic",
        "selectedIconPath": "img/music-s.png",  
        "iconPath": "img/music.png",  
-       "pagePath": "pages/music/music",  
        "text": "音乐"  
      },{  
+       "pagePath": "pages/my/my",  
        "selectedIconPath": "img/my-s.png",  
        "iconPath": "img/my.png",  
-       "pagePath": "pages/my/my",  
        "text": "我的"  
      }
     ]  
