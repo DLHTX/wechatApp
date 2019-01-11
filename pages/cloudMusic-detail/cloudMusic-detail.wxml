@@ -8,7 +8,7 @@
     </view>
 
     <view class='cm-detail-content'>
-        <view class='song-box' wx:for="{{playList.songs}}" wx:key='index'>
+        <view class='song-box' wx:for="{{playList.songs}}" wx:key='index' bindtap='playMusic' data-musicSrc='{{item.url}}' data-musictitle='{{item.name}}'>
             <span style="color:#999;padding:0 14px;">{{index + 1}}</span>
             <view style="width:90%;border-bottom:1px solid #eee;padding:5px 0;">
                 <view >{{item.name}}</view>

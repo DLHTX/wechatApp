@@ -1,3 +1,5 @@
+const app = getApp()
+
 Page({
     data:{
         playid:null,
@@ -9,6 +11,7 @@ Page({
           
         })
         this.getMusic()
+       
     },
     request(url,data,type){
         let that = this
@@ -38,5 +41,11 @@ Page({
                 playList:res.data
             })
         })
+    },
+    playMusic(e){
+        console.log(e.currentTarget.dataset.musicsrc)
+        let title  = e.currentTarget.dataset.musictitle
+        let url = e.currentTarget.dataset.musicsrc
+        app.playMusic(url,title)
     }
 })

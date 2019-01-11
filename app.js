@@ -34,6 +34,23 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    music:wx.getBackgroundAudioManager()
+  },
+  playMusic(url,title){
+    this.globalData.music.src = url 
+    this.globalData.music.title = title
+    this.globalData.music.play()
+  },
+  pauseMusic(){
+    this.globalData.music.pause()
+  },
+  seekMusic(time){
+    this.globalData.music.seek(time)//单位s 跳转到位置
+  },
+  stopMusic(){
+    this.globalData.music.stop()
   }
+
+
 })
