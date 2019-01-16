@@ -1,4 +1,4 @@
-<view class='songList' style='background: url({{currentMusic.pic}})' >
+<view class='songList' style='background: url({{currentMusic.pic}});overflow:hidden;' >
     <view class='songList-box' style="position:absolute;z-index:999;width:100%;">
         <view class='songList-title'>
             <view>{{currentMusic.name}}</view>   
@@ -11,8 +11,9 @@
             <view class="progress" style="">
                 <span style="margin-right:10px;color:white;font-size:12px;" wx:if='{{currentTime}}'>{{currentTime}}</span>
                 <span style="margin-right:10px;color:white;font-size:12px;" wx:if='{{!currentTime}}'>00:00</span>
-                <span style="width:60%;height:2px;display:inline-block;background:#797979;position: relative;">
-                    <span style="width: {{progressWidth}} ;height:2px;display:inline-block;background-color:white;position:absolute;"></span>
+                <span style="width:240px;height:3px;display:inline-block;background:#797979;position: relative;">
+                    <span style="width: {{progressWidth}}% ;height:3px;display:inline-block;background-color:white;position:absolute;"></span>
+                    <span bindtouchstart='touchstart' bindtouchmove='touchmove' bindtouchend='touchend' class='dot {{biggerDot?"biggerDot":""}}' style="height:8px;width:8px;background:red;display:block;position:absolute;border-radius:50%;top:-60%;left:{{progressWidth}}%;"></span>
                 </span>
                 <span style="margin-left:10px;color:white;font-size:12px;">{{duration}}</span>
             </view>
@@ -28,7 +29,13 @@
 
     <!--隐藏区域  -->
     <view class='maskLayer' style='height:100%;background:rgba(0,0,0,0.7);position:absolute;z-index:999;width:100%;' wx:if="{{isOpen}}" bindtap='hideModal'></view>
-    <view class='choose' wx:if="{{isOpen}}" animation='{{animationData}}' style="height:30%;background:white;position:absolute;z-index:999;width:100%;bottom:0;">
-        这里面是内容
+    <view class='choose' wx:if="{{isOpen}}" animation='{{animationData}}' style="overflow:scroll;margin-left:-1px;height:40%;background:white;position:absolute;z-index:999;width:100%;bottom:0;">
+        <view wx:for='{{musicList}}' wx:key='index' bindtap='playthis' data-index='{{index}}'>
+            <span style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;padding:15px 10px;display:block;border-bottom:1px solid #ddd;">
+            <span style="color:rgba(0,0,0,0.6);padding-right:11px;">{{index+1}}</span>
+            {{item.name}}- 
+            <span style="color:rgba(0,0,0,0.5);font-size:13px;">{{item.singer}}</span> 
+            </span>
+        </view>
     </view>
 </view>

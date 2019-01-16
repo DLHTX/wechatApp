@@ -64,5 +64,9 @@ Page({
         wx.navigateTo({
             url: '../songList/songList'
         })
-    }
+    },
+    playAll(){
+        app.playAll(this.data.playList)
+        this.initData()
+    }   
 })

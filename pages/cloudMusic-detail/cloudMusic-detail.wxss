@@ -1,6 +1,7 @@
 .cm-detail{
     height: 100%;
     background:#e64b3a;
+    overflow:hidden;
 }
 .cm-detail-nav{
     background-color:#e64b3a;
@@ -16,10 +17,14 @@
     float:right;
 }
 .cm-detail-content{
-    height: 100%;
+    height:67%;
     border-radius:8px;
     background-color:white;
-    padding:10px;
+    padding:0 10px 10px 10px;
+    overflow: scroll;
+}
+.cm-detail-content::-webkit-scrollbar {
+    display: none;
 }
 .song-box{
     height:45px;

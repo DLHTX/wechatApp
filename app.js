@@ -55,10 +55,27 @@ App({
     this.globalData.musicList.push(music)
     console.log(this.globalData.musicList)
   },
+  playAll(musicList){
+    console.log('传来的list',musicList.songs)
+    this.globalData.musicList = this.globalData.musicList.concat(musicList.songs)
+    console.log('连接完的List', this.globalData.musicList)
+    this.globalData.musicListIndex++
+    this.setMusic()
+    this.play()
+  },
   play(){
     this.globalData.music.play()
     console.log(this.globalData.music.src)
     this.globalData.isPlaying = true
+
+    this.globalData.music.onEnded(res=>{
+      console.log('播放结束')
+      this.playNext()
+    })  
+  },
+  playThis(index){
+    this.globalData.musicListIndex=index
+    this.setMusic()
   },
   playNext(){ 
     if(this.globalData.musicListIndex == this.globalData.musicList.length -1){
@@ -84,7 +101,8 @@ App({
     console.log('全局isplay',this.globalData.isPlaying)
   },
   seekMusic(time){
-    this.globalData.music.seek(time)//单位s 跳转到位置
+    this.globalData.music.duration*(time/100)
+    this.globalData.music.seek(this.globalData.music.duration*(time/100))//单位s 跳转到位置
   },
   stopMusic(){
     this.globalData.music.stop()

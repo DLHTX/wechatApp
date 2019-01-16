@@ -62,14 +62,18 @@
     justify-content:center;
     align-items:center;
 }
-
-
 .songList-box .songList-foot .icon .iconfont{
     color:white;
     font-size:35px;
-    
 }
-
+.choose::-webkit-scrollbar {
+    display: none;
+}
+.biggerDot{
+    height: 13px!important;
+    width:13px!important;
+    top:-160%!important;
+}
 
 
 

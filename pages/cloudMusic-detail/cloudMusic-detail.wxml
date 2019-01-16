@@ -8,6 +8,7 @@
     </view>
 
     <view class='cm-detail-content'>
+        <view bindtap='playAll' class='' style="padding:10px 0;border-bottom:1px solid #eee"> <i class='iconfont icon-bofang' style="padding:10px;font-size:17px;"></i> 播放全部 </view>
         <view class='song-box' wx:for="{{playList.songs}}" wx:key='index' bindtap='playMusic' data-index='{{index}}' data-music='{{item}}'>
             <span style="color:#999;padding:0 14px;" wx:if='{{!(typeIndex==index)}}'>{{index + 1}}</span>
             <i style="color:#e64b3a;padding:0 5px;font-size:25px;" class='iconfont icon-music' wx:if='{{typeIndex==index}}'></i>

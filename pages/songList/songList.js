@@ -6,11 +6,15 @@ Page({
         duration:null,
         currentTime:null,
         progressWidth:null,
+        currentwidth:null,
         isPlaying:null,
         musicListIndex:null,
         currentMusic:null,
         isOpen:false,
-        animationData:{}
+        animationData:{},
+        touchStart:null,
+        touchEnd:null,
+        biggerDot:false,
     },
     onLoad(){
         this.initData()
@@ -28,10 +32,11 @@ Page({
             app.globalData.music.onTimeUpdate(() => {
                 let min = parseInt(app.globalData.music.currentTime / 60)>9?parseInt(app.globalData.music.currentTime / 60):'0'+parseInt(app.globalData.music.currentTime / 60)
                 let sec = parseInt(app.globalData.music.currentTime % 60)>9?parseInt(app.globalData.music.currentTime % 60):'0'+parseInt(app.globalData.music.currentTime % 60)
-                let width = parseInt(app.globalData.music.currentTime  % whichMusic.time)+'%'
+                let width = (app.globalData.music.currentTime  / whichMusic.time) * 100
                 this.setData({
                     currentTime:min +':'+ sec,
-                    progressWidth:width
+                    progressWidth:width,
+                    currentwidth:width
                 })
             })
         }, 500)
@@ -52,6 +57,12 @@ Page({
         app.play()
         this.initData()
     },
+    playthis(e){
+        //console.log(e.currentTarget.dataset.index)
+        app.playThis(e.currentTarget.dataset.index)
+        this.initData()
+        this.hideModal()
+    },
     playNext(){
         app.playNext()
         this.initData()
@@ -59,6 +70,29 @@ Page({
     playFrom(){
         app.playFrom()
         this.initData()
+    },
+
+    touchstart(e){
+        console.log(e,'touchstart')
+        this.setData({
+            touchStart:e.touches[0].pageX
+        })
+
+    },
+    touchmove(e){
+        console.log( ((e.touches[0].pageX - this.data.touchStart)/240)*100)
+        this.setData({
+            touchEnd:e.touches[0].pageX,
+            biggerDot:true
+        })
+        console.log(this.data.progressWidth)
+    },
+    touchend(e){
+        this.setData({
+            progressWidth:this.data.currentwidth +((this.data.touchEnd - this.data.touchStart)/240)*100,
+            biggerDot:false
+        })
+        app.seekMusic(this.data.progressWidth)
     },
     openMusicList(){
         var that = this;
@@ -91,7 +125,6 @@ Page({
         animation.translateY(200).step()
         that.setData({
           animationData:animation.export()
-          
         })
         setTimeout(function () {
           animation.translateY(0).step()
