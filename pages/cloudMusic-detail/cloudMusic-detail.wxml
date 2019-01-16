@@ -2,20 +2,21 @@
     <view class='cm-detail-nav'>
         <image src='{{playList.songListPic}}'/>
         <view class='cm-detail-title'>
-            <view>{{playList.songListName}}</view>
-            <view style="margin-top:35px;font-size:13px;">{{playList.songListPlayCount}}人听过</view>
+            <view >{{playList.songListName}}</view>
+            <view style="margin-top:35px;font-size:13px;" wx:if='{{playList.songListPlayCount}}'>{{playList.songListPlayCount}}人听过</view>
         </view>
     </view>
 
     <view class='cm-detail-content'>
-        <view class='song-box' wx:for="{{playList.songs}}" wx:key='index' bindtap='playMusic' data-musicSrc='{{item.url}}' data-musictitle='{{item.name}}'>
-            <span style="color:#999;padding:0 14px;">{{index + 1}}</span>
+        <view class='song-box' wx:for="{{playList.songs}}" wx:key='index' bindtap='playMusic' data-index='{{index}}' data-music='{{item}}'>
+            <span style="color:#999;padding:0 14px;" wx:if='{{!(typeIndex==index)}}'>{{index + 1}}</span>
+            <i style="color:#e64b3a;padding:0 5px;font-size:25px;" class='iconfont icon-music' wx:if='{{typeIndex==index}}'></i>
             <view style="width:90%;border-bottom:1px solid #eee;padding:5px 0;">
-                <view >{{item.name}}</view>
-                <view style="color:#999;font-size:13px;">{{item.singer}}-{{item.name}}</view>
+                <view style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;" >{{item.name}}</view>
+                <view style="color:#999;font-size:13px;verflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.singer}}-{{item.name}}</view>
             </view>
         </view>
     </view>
 
-    <image src='../../img/musicIcon.png' style="position:fixed;top:84%;width:65px;height:65px;left:77%;"></image>
+    <image class='{{isPlaying?"rotate":""}}' wx:if='{{musicList.length!=0}}' src='../../img/musicIcon.png' style="position:fixed;top:84%;width:65px;height:65px;left:77%;" bindtap='goSong' ></image>
 </view>

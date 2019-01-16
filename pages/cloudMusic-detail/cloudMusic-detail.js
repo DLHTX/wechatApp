@@ -3,15 +3,25 @@ const app = getApp()
 Page({
     data:{
         playid:null,
-        playList:[]
+        playList:[],
+        musicList:null,
+        isPlaying:null,
+        typeIndex:-1,
     },
     onLoad(query){
         this.setData({
             playid:query.id,
-          
         })
         this.getMusic()
-       
+    },
+    onShow(){
+        this.initData()
+    },
+    initData(){
+        this.setData({
+            musicList:app.globalData.musicList,
+            isPlaying:app.globalData.isPlaying
+        })
     },
     request(url,data,type){
         let that = this
@@ -43,9 +53,16 @@ Page({
         })
     },
     playMusic(e){
-        console.log(e.currentTarget.dataset.musicsrc)
-        let title  = e.currentTarget.dataset.musictitle
-        let url = e.currentTarget.dataset.musicsrc
-        app.playMusic(url,title)
+        console.log(e)
+        this.setData({
+            typeIndex : e.currentTarget.dataset.index
+        })
+        app.playMusic(e.currentTarget.dataset.music)
+        this.initData()
+    },
+    goSong(){
+        wx.navigateTo({
+            url: '../songList/songList'
+        })
     }
 })

@@ -27,3 +27,12 @@
     align-items:center;
     margin-top:10px;
 }
+.rotate{
+    animation:rotate 2s infinite;
+    animation-timing-function: linear;
+}
+@keyframes rotate{
+    100%{
+        transform: rotateZ(360deg);
+    }
+}

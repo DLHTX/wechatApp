@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/cloudMusic/cloudMusic",
     "pages/cloudMusic-detail/cloudMusic-detail",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/songList/songList"
   ],
   "window":{
     "navigationBarTextStyle": "black",

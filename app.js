@@ -2,6 +2,7 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
+    this.initData()
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -35,22 +36,64 @@ App({
   },
   globalData: {
     userInfo: null,
-    music:wx.getBackgroundAudioManager()
+    music:wx.getBackgroundAudioManager(),
+    isPlaying:null,
+    musicList:[],
+    musicListIndex:null
   },
-  playMusic(url,title){
-    this.globalData.music.src = url 
-    this.globalData.music.title = title
+  initData(){
+    this.globalData.musicListIndex = -1
+  },
+  playMusic(music){
+    this.globalData.music.src = music.url 
+    this.globalData.music.title = music.name
+    this.globalData.music.coverImgUrl  = music.pic
     this.globalData.music.play()
+    this.globalData.musicListIndex ++
+    this.globalData.isPlaying = true
+    console.log('musicListIndex', this.globalData.musicListIndex)
+    this.globalData.musicList.push(music)
+    console.log(this.globalData.musicList)
+  },
+  play(){
+    this.globalData.music.play()
+    console.log(this.globalData.music.src)
+    this.globalData.isPlaying = true
+  },
+  playNext(){ 
+    if(this.globalData.musicListIndex == this.globalData.musicList.length -1){
+      this.globalData.musicListIndex = 0
+      this.setMusic()
+    }else{
+      this.globalData.musicListIndex ++
+      this.setMusic()
+    }
+  },
+  playFrom(){
+    if(this.globalData.musicListIndex == 0){
+      this.globalData.musicListIndex  = this.globalData.musicList.length - 1
+      this.setMusic()
+    }else{
+      this.globalData.musicListIndex --
+      this.setMusic()
+    }
   },
   pauseMusic(){
     this.globalData.music.pause()
+    this.globalData.isPlaying = false
+    console.log('全局isplay',this.globalData.isPlaying)
   },
   seekMusic(time){
     this.globalData.music.seek(time)//单位s 跳转到位置
   },
   stopMusic(){
     this.globalData.music.stop()
-  }
-
-
+    this.globalData.isPlaying=false
+  },
+  setMusic(){
+    this.globalData.music.src =  this.globalData.musicList[this.globalData.musicListIndex].url
+    this.globalData.music.title =  this.globalData.musicList[this.globalData.musicListIndex].name
+    this.globalData.music.coverImgUrl  =  this.globalData.musicList[this.globalData.musicListIndex].pic
+    this.play()
+  },
 })

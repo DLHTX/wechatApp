@@ -1,0 +1,77 @@
+.songList{
+    width:100%;
+    height:100%;
+    position: relative;
+    padding:1px;
+    box-sizing:border-box;
+    z-index:1;
+    background-size:150% 150%;
+}
+.songList:after{
+    content: "";
+    width:100%;
+    height:100%;
+    position: absolute;
+    left:0;
+    top:0;
+    background: inherit;
+    filter: blur(7px);
+    z-index: 2;
+    background-size:150% 150%;
+}
+.songList-box{
+    height: 100%;
+}
+.songList-box .songList-title{
+    width:100%;
+    text-align: center;
+    color: white;
+    background:rgba(0, 0, 0, 0.3);
+    margin-top:-2px;
+}
+.songList-box .songList-title image{
+    height:28px;
+    width:28px;
+}
+.songList-box .songList-content{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:65px;
+}
+
+.songList-box .songList-content image{
+    object-fit: cover;
+}   
+.songList-box .songList-foot{
+    height:100px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:rgba(0,0,0,0.3);
+    padding-top: 10px;
+}
+.songList-box .songList-foot .progress{
+    display:flex;
+    justify-content:center;
+    align-items:center;    
+}
+.songList-box .songList-foot .icon{
+    height:80px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.songList-box .songList-foot .icon .iconfont{
+    color:white;
+    font-size:35px;
+    
+}
+
+
+
+
+
+

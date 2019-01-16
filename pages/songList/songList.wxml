@@ -1,0 +1,34 @@
+<view class='songList' style='background: url({{currentMusic.pic}})' >
+    <view class='songList-box' style="position:absolute;z-index:999;width:100%;">
+        <view class='songList-title'>
+            <view>{{currentMusic.name}}</view>   
+            <view>{{currentMusic.singer}}</view>   
+        </view>
+        <view class='songList-content'>
+            <image src='{{currentMusic.pic}}' mode='widthFix'></image>
+        </view>
+        <view class='songList-foot'>
+            <view class="progress" style="">
+                <span style="margin-right:10px;color:white;font-size:12px;" wx:if='{{currentTime}}'>{{currentTime}}</span>
+                <span style="margin-right:10px;color:white;font-size:12px;" wx:if='{{!currentTime}}'>00:00</span>
+                <span style="width:60%;height:2px;display:inline-block;background:#797979;position: relative;">
+                    <span style="width: {{progressWidth}} ;height:2px;display:inline-block;background-color:white;position:absolute;"></span>
+                </span>
+                <span style="margin-left:10px;color:white;font-size:12px;">{{duration}}</span>
+            </view>
+            <view class='icon'>
+                <i class='iconfont icon-shangyiqu' bindtap='playFrom' style="margin-right:15px;"></i>  
+                <i class='iconfont icon-bofang' bindtap='play' wx:if='{{!isPlaying}}'></i>   
+                <i class='iconfont icon-pause' bindtap='pause' wx:if='{{isPlaying}}'></i>   
+                <i class='iconfont icon-xiayiqu' bindtap='playNext'  style="margin-left:15px;"></i>    
+                <i class='iconfont icon-list'  bindtap='openMusicList' style="position:absolute;left:85%;"></i>
+            </view>  
+        </view>
+    </view>
+
+    <!--隐藏区域  -->
+    <view class='maskLayer' style='height:100%;background:rgba(0,0,0,0.7);position:absolute;z-index:999;width:100%;' wx:if="{{isOpen}}" bindtap='hideModal'></view>
+    <view class='choose' wx:if="{{isOpen}}" animation='{{animationData}}' style="height:30%;background:white;position:absolute;z-index:999;width:100%;bottom:0;">
+        这里面是内容
+    </view>
+</view>
