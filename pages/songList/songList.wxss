@@ -28,6 +28,7 @@
     color: white;
     background:rgba(0, 0, 0, 0.3);
     margin-top:-2px;
+    padding:5px 0;
 }
 .songList-box .songList-title image{
     height:28px;
@@ -74,8 +75,9 @@
     width:13px!important;
     top:-160%!important;
 }
-
-
+.icon-hover{
+    color:red!important;
+}
 
 
 

@@ -114,4 +114,22 @@ App({
     this.globalData.music.coverImgUrl  =  this.globalData.musicList[this.globalData.musicListIndex].pic
     this.play()
   },
+  request(url,data={},type='GET'){
+        let that = this
+        return new Promise((resolve, reject)=>{
+        wx.request({
+            url: url,
+            data:data,
+            method:type,
+            header: {
+                'content-type':'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+                },
+            success: function(res){
+                resolve(res.data)
+                //that.hideLoad()
+            },
+        })
+    })
+    },
 })

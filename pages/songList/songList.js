@@ -15,6 +15,7 @@ Page({
         touchStart:null,
         touchEnd:null,
         biggerDot:false,
+        lry:[]
     },
     onLoad(){
         this.initData()
@@ -47,6 +48,59 @@ Page({
             musicList:app.globalData.musicList,
             musicListIndex:app.globalData.musicListIndex,
             currentMusic:app.globalData.musicList[app.globalData.musicListIndex]
+        })
+        console.log('歌词',this.data.currentMusic.lrc)
+        app.request(this.data.currentMusic.lrc).then(res=>{
+           this.setData({
+               lry2:this.sliceNull(this.parseLyric(res)),
+               lry:this.forLyric(this.data.lry2)
+           })
+           console.log(this.data.lry)
+        })
+    },
+    sliceNull(lrc) {
+        var result = []
+        for (var i = 0; i < lrc.length; i++) {
+          if (lrc[i][1] == "") {
+          } else {
+            result.push(lrc[i]);
+          }
+        }
+        return result
+    },
+    parseLyric(text) {
+        //将文本分隔成一行一行，存入数组
+        var lines = text.split('\n'),
+          //用于匹配时间的正则表达式，匹配的结果类似[xx:xx.xx]
+          pattern = /\[\d{2}:\d{2}.\d{2}\]/g,
+          //保存最终结果的数组
+          result = [];
+        //去掉不含时间的行
+        while (!pattern.test(lines[0])) {
+          lines = lines.slice(1);
+        };
+        //上面用'\n'生成生成数组时，结果中最后一个为空元素，这里将去掉
+        lines[lines.length - 1].length === 0 && lines.pop();
+        lines.forEach(function (v /*数组元素值*/, i /*元素索引*/, a /*数组本身*/) {
+          //提取出时间[xx:xx.xx]
+            //   var time = v.match(pattern)
+            //提取歌词
+          var arr = []
+          arr.time =  v.match(pattern)
+          arr.value = v.replace(pattern, '');
+          result.push(arr)
+        });
+        //最后将结果数组中的元素按时间大小排序，以便保存之后正常显示歌词
+        result.sort(function (a, b) {
+          return a[0] - b[0];
+        });
+        return result;
+    },
+    forLyric(res){
+        res.forEach(item=>{
+            item.time.forEach(items=>{
+                items = items.replace(/\[|]/g,'')
+            })
         })
     },
     pause(){
@@ -113,7 +167,7 @@ Page({
             that.setData({
                 animationData: animation.export()
             })
-        },200)
+        },100)
     },
     hideModal(e){
         var that = this;
@@ -132,6 +186,6 @@ Page({
             animationData: animation.export(),
             isOpen: false
           })
-        }, 200)
+        }, 100)
     }
 })

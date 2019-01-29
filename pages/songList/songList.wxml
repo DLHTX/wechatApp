@@ -2,10 +2,15 @@
     <view class='songList-box' style="position:absolute;z-index:999;width:100%;">
         <view class='songList-title'>
             <view>{{currentMusic.name}}</view>   
-            <view>{{currentMusic.singer}}</view>   
+            <view style="font-size:12px;color:#eee;">{{currentMusic.singer}}</view>   
         </view>
         <view class='songList-content'>
-            <image src='{{currentMusic.pic}}' mode='widthFix'></image>
+            <!-- <image src='{{currentMusic.pic}}' mode='widthFix'></image> -->
+            <view class="lrc" style="margin-top:0px;height:200px">
+                <block wx:for="{{lry}}" wx:key="">
+                    <view>{{item[1]}}</view>
+                </block>
+            </view>
         </view>
         <view class='songList-foot'>
             <view class="progress" style="">
@@ -18,11 +23,11 @@
                 <span style="margin-left:10px;color:white;font-size:12px;">{{duration}}</span>
             </view>
             <view class='icon'>
-                <i class='iconfont icon-shangyiqu' bindtap='playFrom' style="margin-right:15px;"></i>  
-                <i class='iconfont icon-bofang' bindtap='play' wx:if='{{!isPlaying}}'></i>   
-                <i class='iconfont icon-pause' bindtap='pause' wx:if='{{isPlaying}}'></i>   
-                <i class='iconfont icon-xiayiqu' bindtap='playNext'  style="margin-left:15px;"></i>    
-                <i class='iconfont icon-list'  bindtap='openMusicList' style="position:absolute;left:85%;"></i>
+                <i hover='true' hover-class='icon-hover' class='iconfont icon-shangyiqu' bindtap='playFrom' style="margin-right:15px;"></i>  
+                <i hover='true' hover-class='icon-hover' class='iconfont icon-bofang' bindtap='play' wx:if='{{!isPlaying}}'></i>   
+                <i hover='true' hover-class='icon-hover' class='iconfont icon-pause' bindtap='pause' wx:if='{{isPlaying}}'></i>   
+                <i hover='true' hover-class='icon-hover' class='iconfont icon-xiayiqu' bindtap='playNext'  style="margin-left:15px;"></i>    
+                <i hover='true' hover-class='icon-hover' class='iconfont icon-list'  bindtap='openMusicList' style="position:absolute;left:85%;"></i>
             </view>  
         </view>
     </view>
@@ -32,10 +37,12 @@
     <view class='choose' wx:if="{{isOpen}}" animation='{{animationData}}' style="overflow:scroll;margin-left:-1px;height:40%;background:white;position:absolute;z-index:999;width:100%;bottom:0;">
         <view wx:for='{{musicList}}' wx:key='index' bindtap='playthis' data-index='{{index}}'>
             <span style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;padding:15px 10px;display:block;border-bottom:1px solid #ddd;">
-            <span style="color:rgba(0,0,0,0.6);padding-right:11px;">{{index+1}}</span>
-            {{item.name}}- 
-            <span style="color:rgba(0,0,0,0.5);font-size:13px;">{{item.singer}}</span> 
+                <span style="color:rgba(0,0,0,0.6);padding-right:11px;">{{index+1}}</span>
+                {{item.name}}- 
+                <span style="color:rgba(0,0,0,0.5);font-size:13px;">{{item.singer}}</span> 
+                <i class='iconfont icon-shanchu' style="color:rgba(0,0,0,0.4);float:right;"></i>
             </span>
+          
         </view>
     </view>
 </view>
